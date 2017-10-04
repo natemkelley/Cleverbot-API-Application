@@ -20,7 +20,7 @@
       else {
         alert ('Reply: ' + data.output);
         console.log(data);
-        CSid = data.output.conversation_id;
+        CSid = data.conversation_id;
       }
     }
     function ProcessReply(data){
@@ -42,6 +42,7 @@
         var text = $("#userResponse").val();
         console.log(text);
         var input = encodeURIComponent (text);
+        console.log(CSid);
         $.ajax({
             url: url,
             data: {"input": input, "key": key, "cs": CSid}, //input automatically encoded
