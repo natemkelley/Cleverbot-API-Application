@@ -1,0 +1,32 @@
+<html>
+  <head>
+
+  </head>
+  <body>
+
+
+    <script>
+      url = "https://www.cleverbot.com/getreply";
+      key = "CC4sk7cA_iQlY3ymZ43M1AkPwCQ";
+      input = encodeURIComponent ("How are you?");
+      function ProcessReply (data) {
+        if (data.error) console.log ('Error: ' + data.error);
+        else alert ('Reply: ' + data.output);
+      }
+      $.ajax({
+          url: url,
+          data: {"input": input, "key": key}, //input automatically encoded
+          dataType: "jsonp",
+          success: ProcessReply
+      });
+    </script>
+  </body>
+</html>
+<!-- {
+  "cs":"112nxdyIJO2...AAA",
+  "interaction_count":"2",
+  "input":"Hello.",
+  "output":"How are you?",
+  "conversation_id":"AYAR1E3ITW",
+  ...
+} -->

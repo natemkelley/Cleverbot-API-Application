@@ -1,0 +1,164 @@
+<html>
+<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+
+
+<body>
+    <div class="">
+        <div id="container">
+            <img id="skeletor" src="Skeletor-Pixel.gif" alt="Smiley face" height="242" width="242" onclick="skeletorMove()">
+
+        </div>
+        <div class="absolute">
+            <h1>Click SKELETOR to unleash <br> his awesome power!</h1>
+            The lower the better:
+            <input type="range" min="1" max="100" value="50" id="myRange">
+            <p>Value: <span id="demo"></span></p>
+            <p id="1"></p>
+            <button onclick="changePic()">Click me!</button>
+        </div>
+
+    </div>
+</body>
+
+
+
+
+<script>
+    function changePic(){
+      document.getElementById("skeletor").src="mario.gif";
+    }
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+    }
+
+
+
+
+    function skeletorMove() {
+
+        var paused = false;
+
+        document.body.onkeyup = function(e){
+            if(e.keyCode == 32){
+                paused = !paused;
+            }
+        }
+
+        //Get element variables
+        var elem = document.getElementById("skeletor");
+        var posheight = 0;
+        var poswidth = 0;
+
+        //set how fast he should move
+        var slider = document.getElementById("myRange");
+        //document.getElementById("1").innerHTML = slider.value / 10;
+        var id = setInterval(frame, slider.value / 100);
+
+        //his cage
+        var boxtop = 0;
+        var boxright = window.innerWidth - 242;
+        var boxbottom = window.innerHeight - 242;
+        var boxleft = 0;
+
+        //vars to know when he should change directions
+        var godown = 1;
+        var goright = 1;
+        var checker = 0;
+
+
+
+        setInterval(function() {
+            if (checker == 0) {
+                javascript: document.getElementById('container').style.background = "#9480cb";
+                checker = 1;
+            }
+            else {
+                javascript: document.getElementById('container').style.background = "#e6f531";
+                checker = 0;
+            }
+        }, slider.value * 10);
+
+
+        function frame() {
+
+            if (poswidth >= boxright) {
+                goright = 0;
+            }
+            if (poswidth <= boxleft) {
+                goright = 1;
+            }
+            if (posheight >= boxbottom) {
+                godown = 0;
+            }
+            if (posheight <= boxtop) {
+                godown = 1;
+            }
+            if(!paused)
+            {
+                if (goright == 1) {
+                    poswidth++;
+                    poswidth++;
+                } else {
+                    poswidth--;
+                    poswidth--;
+
+                }
+                if (godown == 1) {
+                    posheight++;
+                } else {
+                    posheight--;
+                }
+            }
+
+            elem.style.top = posheight + 'px';
+            elem.style.left = poswidth + 'px';
+
+            //document.getElementById("2").innerHTML = posheight;
+        }
+    }
+</script>
+<style>
+    #container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: #f1f1f1;
+        -webkit-transition: all 0.13s ease-in-out;
+        -moz-transition: all 0.13s ease-in-out;
+        -o-transition: all 0.13s ease-in-out;
+        -ms-transition: all 0.13s ease-in-out;
+        transition: all 0.13s ease-in-out;
+    }
+
+    #skeletor {
+        position: absolute;
+        background-color: ;
+        z-index: 9999;
+    }
+
+    .absolute {
+        position: absolute;
+        left: 12em;
+        top: 40%;
+        text-align: center;
+        font-size: 1em;
+        line-height: 60px;
+        z-index: 0;
+        font-family: 'Press Start 2P', cursive;
+    }
+
+    .absolute button {
+        box-shadow: 10px 10px 5px #888888;
+        padding: 30px 100px 30px 100px;
+        border: 1px #000;
+    }
+
+    h1 {}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</html>
