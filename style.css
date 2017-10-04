@@ -8,7 +8,19 @@
 }
 
 .inputbox {
-    min-width: 400px;
+    min-width: 300px;
+    max-width: 20%;
 }
 
 .vertical-center {}
+
+@media only screen and (max-width: 450px) {
+    .inputbox {
+        min-width: 80%;
+        max-width: 100%;
+    }
+    .btn-danger {
+        margin-top: 8px;
+        min-width: 100%;
+    }
+}
