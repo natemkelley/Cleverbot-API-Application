@@ -1,24 +1,36 @@
 <html>
   <head>
-
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-
-
+    <div id="chatbox"></div>
+    <form>
+        <input type="text" id="userResponse" value="">
+        <input id="submit" type="submit" value="Submit">
+    </form>
     <script>
-      url = "https://www.cleverbot.com/getreply";
-      key = "CC4sk7cA_iQlY3ymZ43M1AkPwCQ";
-      input = encodeURIComponent ("How are you?");
-      function ProcessReply (data) {
-        if (data.error) console.log ('Error: ' + data.error);
-        else alert ('Reply: ' + data.output);
-      }
-      $.ajax({
-          url: url,
-          data: {"input": input, "key": key}, //input automatically encoded
-          dataType: "jsonp",
-          success: ProcessReply
+    $(document).ready(function () {
+      $("#submit").click(function(e){
+        e.preventDefault();
+        $("#userResponse").text(text);
+        console.log(text);
+        url = "https://www.cleverbot.com/getreply";
+        key = "CC4sk7cA_iQlY3ymZ43M1AkPwCQ";
+        input = encodeURIComponent (text);
+        function ProcessReply (data) {
+          if (data.error) console.log ('Error: ' + data.error);
+          else alert ('Reply: ' + data.output);
+        }
+        $.ajax({
+            url: url,
+            data: {"input": input, "key": key}, //input automatically encoded
+            dataType: "jsonp",
+            success: ProcessReply
+        });
       });
+    });
     </script>
   </body>
 </html>
