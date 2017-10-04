@@ -15,18 +15,19 @@
     var CSid;
     var url = "https://www.cleverbot.com/getreply";
     var key = "CC4sk7cA_iQlY3ymZ43M1AkPwCQ";
-    function ProcessFirstReply (data) {
-      if (data.error) console.log ('Error: ' + data.error);
-      else {
-        alert ('Reply: ' + data.output);
-        console.log(data);
-        CSid = data.conversation_id;
-      }
-    }
+    // function ProcessFirstReply (data) {
+    //   if (data.error) console.log ('Error: ' + data.error);
+    //   else {
+    //     alert ('Reply: ' + data.output);
+    //     console.log(data);
+    //     CSid = data.conversation_id;
+    //   }
+    // }
     function ProcessReply(data){
       if (data.error) console.log ('Error: ' + data.error);
       else {
         alert ('Reply: ' + data.output);
+        CSid = data.cs;
         console.log(data);
       }
     }
@@ -35,7 +36,7 @@
           url: url,
           data: {"input": "Hi", "key": key}, //input automatically encoded
           dataType: "jsonp",
-          success: ProcessFirstReply
+          success: ProcessReply
       });
       $("#submit").click(function(e){
         e.preventDefault();
