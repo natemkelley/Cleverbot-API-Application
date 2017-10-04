@@ -14,11 +14,11 @@
     $(document).ready(function () {
       $("#submit").click(function(e){
         e.preventDefault();
-        $("#userResponse").text(text);
+        var text = $("#userResponse").val();
         console.log(text);
-        url = "https://www.cleverbot.com/getreply";
-        key = "CC4sk7cA_iQlY3ymZ43M1AkPwCQ";
-        input = encodeURIComponent (text);
+        var url = "https://www.cleverbot.com/getreply";
+        var key = "CC4sk7cA_iQlY3ymZ43M1AkPwCQ";
+        var input = encodeURIComponent (text);
         function ProcessReply (data) {
           if (data.error) console.log ('Error: ' + data.error);
           else alert ('Reply: ' + data.output);
