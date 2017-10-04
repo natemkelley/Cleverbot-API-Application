@@ -10,8 +10,31 @@
         <input type="text" id="userResponse" value="">
         <input id="submit" type="submit" value="Submit">
     </form>
+
     <script>
+    var CSid;
+    function ProcessFirstReply (data) {
+      if (data.error) console.log ('Error: ' + data.error);
+      else {
+        alert ('Reply: ' + data.output);
+        console.log(data);
+        CSid = data.output.cs;
+      }
+    }
+    function ProcessReply(data){
+      if (data.error) console.log ('Error: ' + data.error);
+      else {
+        alert ('Reply: ' + data.output);
+        console.log(data);
+      }
+    }
     $(document).ready(function () {
+      $.ajax({
+          url: url,
+          data: {"input": input, "key": key}, //input automatically encoded
+          dataType: "jsonp",
+          success: ProcessFirstReply
+      });
       $("#submit").click(function(e){
         e.preventDefault();
         var text = $("#userResponse").val();
@@ -19,16 +42,13 @@
         var url = "https://www.cleverbot.com/getreply";
         var key = "CC4sk7cA_iQlY3ymZ43M1AkPwCQ";
         var input = encodeURIComponent (text);
-        function ProcessReply (data) {
-          if (data.error) console.log ('Error: ' + data.error);
-          else alert ('Reply: ' + data.output);
-        }
         $.ajax({
             url: url,
-            data: {"input": input, "key": key}, //input automatically encoded
+            data: {"input": input, "key": key, "cs": CSid}, //input automatically encoded
             dataType: "jsonp",
             success: ProcessReply
         });
+
       });
     });
     </script>
