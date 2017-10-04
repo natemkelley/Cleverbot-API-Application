@@ -13,6 +13,8 @@
 
     <script>
     var CSid;
+    var url = "https://www.cleverbot.com/getreply";
+    var key = "CC4sk7cA_iQlY3ymZ43M1AkPwCQ";
     function ProcessFirstReply (data) {
       if (data.error) console.log ('Error: ' + data.error);
       else {
@@ -31,7 +33,7 @@
     $(document).ready(function () {
       $.ajax({
           url: url,
-          data: {"input": input, "key": key}, //input automatically encoded
+          data: {"input": "Hi", "key": key}, //input automatically encoded
           dataType: "jsonp",
           success: ProcessFirstReply
       });
@@ -39,8 +41,6 @@
         e.preventDefault();
         var text = $("#userResponse").val();
         console.log(text);
-        var url = "https://www.cleverbot.com/getreply";
-        var key = "CC4sk7cA_iQlY3ymZ43M1AkPwCQ";
         var input = encodeURIComponent (text);
         $.ajax({
             url: url,
