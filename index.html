@@ -1,1 +1,79 @@
-<html><head> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <link rel="stylesheet" type="text/css" href="style.css"></head><body> <div class="vertical-center"> <div class="container" style="padding-top: 75px "> <div class="col-md-8 col-md-offset-3"> <h1>Make a new friend!</h1> </div></div><div class="container"> <div class="col-md-8 col-md-offset-3 "> <h4><strong>Friend's reply:</strong> <span>waiting for reply...</span></h4> </div><div class="col-md-8 col-md-offset-3 "> <form class="form-inline"> <input type="text" id="userResponse" value="" class="form-control inputbox" placeholder="Enter your reply"> <input id="submit" type="submit" value="Submit" class="btn btn-danger"></form> </div></div></div><script>var CSid; var url="https://www.cleverbot.com/getreply"; var key="CC4sk7cA_iQlY3ymZ43M1AkPwCQ"; function ProcessReply(data){if (data.error) console.log('Error: ' + data.error); else{$("span").text(data.output); CSid=data.cs; console.log(data);}}function clearInput(){$('#userResponse').val(''); $('#userResponse').focus().select();}$(document).ready(function(){$.ajax({url: url, data:{"input": "Hello", "key": key}, dataType: "jsonp", success: ProcessReply}); $("#submit").click(function(e){e.preventDefault(); $("span").text("waiting for reply..."); var text=$("#userResponse").val(); console.log(text); var input=encodeURIComponent(text); console.log(CSid); clearInput(); $.ajax({url: url, data:{"input": input, "key": key, "cs": CSid}, dataType: "jsonp", success: ProcessReply});});}); </script></body></html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div class="vertical-center">
+        <div class="container" style="padding-top: 75px ">
+            <div class="col-md-8 col-md-offset-3">
+                <h1>Make a new friend!</h1> </div>
+        </div>
+        <div class="container">
+            <div class="col-md-8 col-md-offset-3 ">
+                <h4><strong>Friend's reply:</strong> <span>waiting for reply...</span></h4> </div>
+            <div class="col-md-8 col-md-offset-3 ">
+                <form class="form-inline">
+                    <input type="text" id="userResponse" value="" class="form-control inputbox" placeholder="Enter your reply">
+                    <input id="submit" type="submit" value="Submit" class="btn btn-danger">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        var CSid;
+        var url = "https://www.cleverbot.com/getreply";
+        var key = "CC4sk7cA_iQlY3ymZ43M1AkPwCQ";
+
+        function ProcessReply(data) {
+            if (data.error) console.log('Error: ' + data.error);
+            else {
+                $("span").text(data.output);
+                CSid = data.cs;
+                console.log(data);
+            }
+        }
+
+        function clearInput() {
+            $('#userResponse').val('');
+            $('#userResponse').focus().select();
+        }
+        $(document).ready(function() {
+            $.ajax({
+                url: url,
+                data: {
+                    "input": "Hello",
+                    "key": key
+                },
+                dataType: "jsonp",
+                success: ProcessReply
+            });
+            $("#submit").click(function(e) {
+                e.preventDefault();
+                $("span").text("waiting for reply...");
+                var text = $("#userResponse").val();
+                console.log(text);
+                var input = encodeURIComponent(text);
+                console.log(CSid);
+                clearInput();
+                $.ajax({
+                    url: url,
+                    data: {
+                        "input": input,
+                        "key": key,
+                        "cs": CSid
+                    },
+                    dataType: "jsonp",
+                    success: ProcessReply
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
